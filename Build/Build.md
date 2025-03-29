@@ -11,12 +11,22 @@ git add *
 ```
 
 ```cmd
-git status
+git commit -m "Commit Explain Code"
 ```
 
 ```cmd
-git status
+git push origin main
 ```
+
+---
+
+---
+
+---
+
+---
+
+---
 
 ```cmd
 git status
