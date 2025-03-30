@@ -4,6 +4,8 @@ import axios from 'axios'
 
 const image = ref(null)
 const colors = ref([])
+// صورة افتراضية في حالة عدم اختيار صورة
+const previewImage = ref('default-image.jpg')
 
 const uploadImage = async () => {
   const formData = new FormData()
@@ -16,6 +18,14 @@ const uploadImage = async () => {
     console.error('Error extracting colors:', error)
   }
 }
+const handleFileChange = (event) => {
+  const file = event.target.files[0]
+  if (file) {
+    image.value = file
+    previewImage.value = URL.createObjectURL(file)
+  }
+}
+console.log('handleFileChange: ', handleFileChange)
 </script>
 
 <template>
@@ -44,7 +54,7 @@ const uploadImage = async () => {
               <prime_file_upload
                 mode="basic"
                 name="demo[]"
-                url="/api/upload"
+                url="/api/analysis"
                 accept="image/*"
                 :maxFileSize="1000000"
                 @upload="onUpload"
@@ -57,10 +67,7 @@ const uploadImage = async () => {
                 icon="pi pi-undo"
                 label="Show Anaysis"
                 severity="help"
-                @click="
-                  uploadImage
-                  visbilt = true
-                "
+                @click="(uploadImage, (visbilt = true))"
                 class="class_name"
               />
             </div>
