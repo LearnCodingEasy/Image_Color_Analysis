@@ -1,15 +1,39 @@
 <script setup>
 import { ref } from 'vue'
 import axios from 'axios'
+import { useToast } from 'primevue/usetoast'
 
 const image = ref(null)
 const colors = ref([])
-// صورة افتراضية في حالة عدم اختيار صورة
-const previewImage = ref('default-image.jpg')
+// يحتفظ بملف الصورة
+const file = ref(null)
+const toast = useToast()
+// ✅ التعامل مع اختيار الصورة
+const handleImageFileUpload = (event) => {
+  const selectedFile = event.files ? event.files[0] : null
+  if (selectedFile) {
+    file.value = selectedFile
+    image.value = URL.createObjectURL(selectedFile) // تحويل الملف إلى رابط URL لعرضه
+  } else {
+    console.log('No file selected.')
+  }
+}
 
 const uploadImage = async () => {
+  if (!file.value) {
+    console.error('No image selected!')
+    toast.add({
+      severity: 'error',
+      summary: `No image`,
+      detail: `No image selected!`,
+      life: 3000,
+    })
+    return
+  }
+
   const formData = new FormData()
-  formData.append('image', image.value)
+  formData.append('image', file.value)
+  // formData.append('image', image.value)
 
   try {
     const response = await axios.post('http://127.0.0.1:8000/api/analysis/', formData)
@@ -18,20 +42,13 @@ const uploadImage = async () => {
     console.error('Error extracting colors:', error)
   }
 }
-const handleFileChange = (event) => {
-  const file = event.target.files[0]
-  if (file) {
-    image.value = file
-    previewImage.value = URL.createObjectURL(file)
-  }
-}
-console.log('handleFileChange: ', handleFileChange)
 </script>
 
 <template>
   <div class="wrapper">
     <div class="inner">
       <div class="container">
+        <!-- Title -->
         <div class="title">
           <h2 class="text-center bold animate__animated animate__backInUp">
             🎨 Extract colors from images 🎨
@@ -39,53 +56,58 @@ console.log('handleFileChange: ', handleFileChange)
         </div>
 
         <!-- Start Card -->
-        <prime_card style="width: 55rem; overflow: hidden; margin: 2rem auto">
-          <template #header>
-            <prime_skeleton width="100%" height="450px"></prime_skeleton>
-          </template>
-          <template #title>
-            <div class="" style="margin-bottom: 1rem">
-              <h1 class="animate__animated animate__bounce">
-                The Five most used colors in the picture
-              </h1>
-            </div>
-            <div class="flex flex-col m-auto justify-between">
-              <Toast />
-              <prime_file_upload
-                mode="basic"
-                name="demo[]"
-                url="/api/analysis"
-                accept="image/*"
-                :maxFileSize="1000000"
-                @upload="onUpload"
-                :auto="true"
-                chooseLabel="Your Image"
-                @change="(e) => (image = e.target.files[0])"
-                icon="pi pi-image"
-              />
-              <prime_button
-                icon="pi pi-undo"
-                label="Show Anaysis"
-                severity="help"
-                @click="(uploadImage, (visbilt = true))"
-                class="class_name"
-              />
-            </div>
-          </template>
-
-          <template #content>
-            <div v-if="colors.length" class="colors">
-              <div
-                v-for="(color, index) in colors"
-                :key="index"
-                :style="{ backgroundColor: color }"
-                class="animate__animated animate__bounce"
-              >
-                {{ color }}
+        <div class="project">
+          <prime_card style="width: 53rem; overflow: hidden; margin: 2rem auto">
+            <template #header>
+              <div class="" v-if="!image">
+                <prime_skeleton width="100%" height="430px"></prime_skeleton>
               </div>
-            </div>
-          </template>
-        </prime_card>
+              <div class="" v-else>
+                <img :src="image" alt="Uploaded Image" />
+              </div>
+            </template>
+            <template #title>
+              <div class="" style="margin-bottom: 1rem">
+                <h1 class="animate__animated animate__bounce">
+                  The Five most used colors in the picture
+                </h1>
+              </div>
+              <div class="flex flex-col m-auto justify-between control">
+                <prime_file_upload
+                  mode="basic"
+                  name="demo[]"
+                  accept="image/*"
+                  :maxFileSize="1000000"
+                  @select="handleImageFileUpload"
+                  chooseLabel="Your Image"
+                  icon="pi pi-image"
+                />
+                <button @click="uploadImage" icon="pi pi-image">Color analysis</button>
+              </div>
+              <Toast />
+            </template>
+
+            <template #content>
+              <div v-if="colors.length" class="colors">
+                <div
+                  v-for="(color, index) in colors"
+                  :key="index"
+                  :style="{ backgroundColor: color }"
+                  class="animate__animated animate__bounce"
+                >
+                  {{ color }}
+                </div>
+              </div>
+              <div class="flex justify-between" v-else>
+                <prime_skeleton width="150px" height="150px"></prime_skeleton>
+                <prime_skeleton width="150px" height="150px"></prime_skeleton>
+                <prime_skeleton width="150px" height="150px"></prime_skeleton>
+                <prime_skeleton width="150px" height="150px"></prime_skeleton>
+                <prime_skeleton width="150px" height="150px"></prime_skeleton>
+              </div>
+            </template>
+          </prime_card>
+        </div>
         <!-- End Card -->
       </div>
     </div>
