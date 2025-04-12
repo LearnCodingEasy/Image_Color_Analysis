@@ -68,8 +68,8 @@ const uploadImage = async () => {
             </template>
             <template #title>
               <div class="" style="margin-bottom: 1rem">
-                <h1 class="animate__animated animate__bounce">
-                  The Five most used colors in the picture
+                <h1 class="animate__animated animate__bounce text-capitalize capitalize">
+                  The Five Most used colors in the picture
                 </h1>
               </div>
               <div class="flex flex-col m-auto justify-between control">

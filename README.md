@@ -32,13 +32,15 @@ python manage.py migrate
 python manage.py runserver
 ```
 
-
 ---
 
 ---
 
 ### Vue
 
+```cmd
+cd image_color_analysis_vue
+```
 
 ```cmd
 npm run dev
