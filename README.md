@@ -1,5 +1,8 @@
 # Image_Color_Analysis
 
+
+[![شرح المشروع على يوتيوب](https://img.youtube.com/vi/abc123/0.jpg)](https://www.youtube.com/watch?v=abc123)
+
 ### Clone Project
 
 ```cmd
