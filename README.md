@@ -4,12 +4,10 @@
 
 
 
-[![Project explanation on YouTube](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAPAUjCr3pNPG-PMPT1B0RJEDbcUw)](https://youtu.be/Q5gg6YGGj0s?si=wc4a_PZwkchecFMn)
-
-[![Project explanation on YouTube](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAPAUjCr3pNPG-PMPT1B0RJEDbcUw)](https://youtu.be/Q5gg6YGGj0s?si=wc4a_PZwkchecFMn)
 
 
-![This is an image]([https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAPAUjCr3pNPG-PMPT1B0RJEDbcUw])
+![This is an image](https://i.ytimg.com/vi/Q5gg6YGGj0s/hqdefault.jpg?sqp=-oaymwEnCNACELwBSFryq4qpAxkIARUAAIhCGAHYAQHiAQoIGBACGAY4AUAB&rs=AOn4CLAPAUjCr3pNPG-PMPT1B0RJEDbcUw)(https://youtu.be/Q5gg6YGGj0s?si=wc4a_PZwkchecFMn)
+
 
 
 ### Clone Project
